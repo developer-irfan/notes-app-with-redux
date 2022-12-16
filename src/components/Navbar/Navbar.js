@@ -1,11 +1,25 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { userLogout } from "../action/action";
+import { useNavigate } from "react-router-dom";
 
 //function
 const Navbar = () => {
   //
   const hasLogin = useSelector((state) => state.loginReducer);
+
+  //navigate
+  const navigate = useNavigate();
+
+  //
+  const dispatch = useDispatch();
+
+  //
+  const handleLogout = () => {
+    dispatch(userLogout());
+    navigate("/");
+  };
 
   //return statement
   return (
@@ -107,6 +121,18 @@ const Navbar = () => {
               className="w-full min-w-max space-y-2 
                 border-yellow-200 lg:space-y-0 sm:w-max lg:border-l dark:lg:border-gray-700"
             >
+              {hasLogin && (
+                <button
+                  onClick={handleLogout}
+                  type="button"
+                  title="Start buying"
+                  className="w-full py-3 px-6 text-center rounded-full transition bg-yellow-300 hover:bg-yellow-100 active:bg-yellow-400 focus:bg-yellow-300 sm:w-max"
+                >
+                  <span className="block text-yellow-900 font-semibold text-sm">
+                    Logout
+                  </span>
+                </button>
+              )}
               {!hasLogin && (
                 <>
                   <a

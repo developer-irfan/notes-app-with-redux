@@ -27,3 +27,9 @@ export const userLogin = () => {
     type: "USERLOGIN",
   };
 };
+
+export const userLogout = () => {
+  return {
+    type: "USERLOGOUT",
+  };
+};

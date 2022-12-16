@@ -27,7 +27,7 @@ function NoteItem(props) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 text-white"
+          className="w-6 h-6 text-white hover:text-red-700"
         >
           <path
             strokeLinecap="round"
