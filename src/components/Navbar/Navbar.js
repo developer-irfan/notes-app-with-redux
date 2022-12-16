@@ -1,6 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-function Navbar() {
+import { useSelector } from "react-redux";
+
+//function
+const Navbar = () => {
+  //
+  const hasLogin = useSelector((state) => state.loginReducer);
+
+  //return statement
   return (
     <nav className="fixed z-10 w-full bg-white dark:bg-transparent md:absolute md:bg-transparent">
       <div className="container m-auto px-2 md:px-12 lg:px-7 xl:px-14">
@@ -63,22 +70,27 @@ function Navbar() {
                 className="tracking-wide font-medium  text-sm 
                     flex flex-col gap-y-6 lg:gap-y-0 lg:flex-row w-full"
               >
-                <li>
-                  <NavLink
-                    to="/"
-                    className="block md:px-4 transition dark:text-gray-300 dark:hover:text-yellow-300 hover:text-yellow-700"
-                  >
-                    <span>Add Notes</span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/notes"
-                    className="block md:px-4 transition dark:text-gray-300 dark:hover:text-yellow-300 hover:text-yellow-700"
-                  >
-                    <span>Your Notes</span>
-                  </NavLink>
-                </li>
+                {hasLogin && (
+                  <>
+                    <li>
+                      <NavLink
+                        to="/addnotes"
+                        className="block md:px-4 transition dark:text-gray-300 dark:hover:text-yellow-300 hover:text-yellow-700"
+                      >
+                        <span>Add Notes</span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/notes"
+                        className="block md:px-4 transition dark:text-gray-300 dark:hover:text-yellow-300 hover:text-yellow-700"
+                      >
+                        <span>Your Notes</span>
+                      </NavLink>
+                    </li>
+                  </>
+                )}
+
                 <li>
                   <a
                     href="https://dev-irfan.netlify.app/"
@@ -95,30 +107,36 @@ function Navbar() {
               className="w-full min-w-max space-y-2 
                 border-yellow-200 lg:space-y-0 sm:w-max lg:border-l dark:lg:border-gray-700"
             >
-              <button
-                type="button"
-                title="Start buying"
-                className="w-full py-3 px-6 text-center rounded-full transition active:bg-yellow-200 dark:active:bg-gray-700 dark:focus:bg-gray-800 focus:bg-yellow-100 sm:w-max"
-              >
-                <span className="block text-yellow-800 dark:text-white font-semibold text-sm">
-                  Sign up
-                </span>
-              </button>
-              <button
-                type="button"
-                title="Start buying"
-                className="w-full py-3 px-6 text-center rounded-full transition bg-yellow-300 hover:bg-yellow-100 active:bg-yellow-400 focus:bg-yellow-300 sm:w-max"
-              >
-                <span className="block text-yellow-900 font-semibold text-sm">
-                  Login
-                </span>
-              </button>
+              {!hasLogin && (
+                <>
+                  <a
+                    href="#"
+                    type="button"
+                    title="Start buying"
+                    className="w-full py-3 px-6 text-center rounded-full transition active:bg-yellow-200 dark:active:bg-gray-700 dark:focus:bg-gray-800 focus:bg-yellow-100 sm:w-max"
+                  >
+                    <span className="block text-yellow-800 dark:text-white font-semibold text-sm">
+                      Sign up
+                    </span>
+                  </a>
+                  <a
+                    href="/"
+                    type="button"
+                    title="Start buying"
+                    className="w-full py-3 px-6 text-center rounded-full transition bg-yellow-300 hover:bg-yellow-100 active:bg-yellow-400 focus:bg-yellow-300 sm:w-max"
+                  >
+                    <span className="block text-yellow-900 font-semibold text-sm">
+                      Login
+                    </span>
+                  </a>
+                </>
+              )}
             </div>
           </div>
         </div>
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;

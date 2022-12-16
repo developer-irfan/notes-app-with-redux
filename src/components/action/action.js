@@ -15,3 +15,15 @@ export const delete_note = (id) => {
     id,
   };
 };
+
+export const showAddNotesForm = () => {
+  return {
+    type: "DISPLAYFORM",
+  };
+};
+
+export const userLogin = () => {
+  return {
+    type: "USERLOGIN",
+  };
+};
